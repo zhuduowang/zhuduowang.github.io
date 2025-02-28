@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective</title>
+   <link rel="icon" href="./static/images/whu_xiaohui.png">
+</head>
+<body>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/whu_xiaohui.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=9qk9xhoAAAAJ&hl=en">Duowang Zhu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=sBjFwuQAAAAJ&hl=en">Xiaohu Huang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.researchgate.net/profile/Haiyan-Huang-11">Haiyan Huang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=xZ-0R3cAAAAJ&hl=zh-CN">Hao Zhou</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=lsz8fJoAAAAJ&hl=en">Zhenfeng Shao</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>LIESMARS, Wuhan University,</span>
+            <span class="author-block"><sup>2</sup>Visual AI Lab, The University of Hongkong,</span>
+            <span class="author-block"><sup>3</sup>VIS, Baidu Inc.</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/zhuduowang/Change3D"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img 
+        id="teaser-image" 
+        src="./static/images/different_paradigms_print_v1.3_large_width.png" 
+        alt="Teaser Image" 
+        style="width: 100%; height: auto;"
+      >
+      <h2 class="subtitle has-text-justified">
+        <strong>Previous paradigm <em>vs.</em> our paradigm.</strong> 
+        (a) The previous approach processes bi-temporal image pairs separately using shared encoders and dedicated change extractors. 
+        (b) Our approach integrates a learnable perception frame within a video encoder, enabling direct interaction and eliminating the need for separate change extractors.      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          In this paper, we present <strong>Change3D</strong>, a framework that reconceptualizes the change detection and captioning tasks through video modeling.
+          </p>
+          <p>
+            Recent methods have achieved remarkable success by regarding each pair of bi-temporal images as separate frames. They employ a shared-weight
+             image encoder to extract spatial features and then use a change extractor to capture differences between the two images. However, image
+              feature encoding, being a task-agnostic process, cannot attend to changed regions effectively. Furthermore, different change extractors 
+              designed for various change detection and captioning tasks make it difficult to have a unified framework.
+          </p>
+          <p>
+            To tackle these challenges, Change3D regards the bi-temporal images as comprising two frames akin to a tiny video. By integrating learnable
+             perception frames between the bi-temporal images, a video encoder enables the perception frames to interact with the images directly and
+              perceive their differences. Therefore, we can get rid of the intricate change extractors, providing a unified framework for different
+               change detection and captioning tasks. We verify Change3D on multiple tasks, encompassing change detection (including <strong>binary change 
+               detection (BCD), semantic change detection (SCD), and building damage assessment (BDA)</strong>) and <strong>change captioning (CC)</strong>, across eight standard benchmarks. Without
+                bells and whistles, this simple yet effective framework can achieve superior performance with an ultra-light video model comprising only 
+                <strong>&sim;6%-13%</strong> of the parameters and <strong>&sim;8%-34%</strong> of the FLOPs compared to state-of-the-art methods. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overall Architectures</h2>
+        <div class="publication-image">
+            <img src="./static/images/framework_print_v1.3_unify.png" alt="Overall Architectures"
+            style="width: 100%; height: auto;"
+            >
+          <p class="has-text-justified">
+            <strong>Overall architectures of Change3D for BCD, SCD, BDA, and CC:</strong>
+            (a) BCD necessitates acquiring a feature to represent changed targets, thus a perception
+            frame is incorporated for sensing.
+            (b) SCD involves representing semantic changes in T<sub>1</sub> and T<sub>2</sub> alongside binary
+            changes. To accomplish this, three perception frames are integrated to facilitate semantic change learning.
+            (c) BDA entails expressing two perception features for building localization and damage classification. Therefore,
+            two perception frames are inserted to capture building damage. 
+            (d) CC involves generating a feature that represents the altered content, thus incorporating a perception frame
+            for interpreting content changes.
+          </p>
+          <!-- <p class="has-text-justified">
+          (b) SCD involves representing semantic changes in T<sub>1</sub> and T<sub>2</sub>  alongside binary
+          changes. To accomplish this, three perception frames are integrated to facilitate semantic change learning. 
+          </p>
+
+          <p class="has-text-justified">
+            (c) BDA entails expressing two perception features for building localization and damage classification. Therefore, two perception frames are
+            inserted to capture building damage. 
+          </p>
+
+          <p class="has-text-justified">
+            (d) CC involves generating a feature that represents the altered content, thus incorporating a perception frame for interpreting content changes.
+          </p> -->
+        </div>
+      </div>
+    </div>
+    <!--/ Paper framework. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Performance</h2>
+        <div class="publication-image">
+          <p class="has-text-justified">
+            We conduct extensive experiments on <strong>eight</strong> public datasets: LEVIR-CD, WHU-CD, CLCD, HRSCD, SECOND, xBD, LEVIR-CC, and DUBAI-CC.
+          </p>
+          <br>
+            <img src="./static/images/result_of_BCD.png"
+            style="width: 100%; height: auto;" class="mb-4"
+            >
+            <img src="./static/images/result_of_SCD.png"
+            style="width: 100%; height: auto;" class="mb-4"
+            >
+            <img src="./static/images/result_of_BDA.png"
+            style="width: 100%; height: auto;" class="mb-4"
+            >
+            <img src="./static/images/result_of_CC.png"
+            style="width: 100%; height: auto;" class="mb-4"
+            >
+        </div>
+      </div>
+    </div>
+    <!-- Performance -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Visualization</h2>
+        <div class="publication-image">
+          <p class="has-text-justified">
+            We present qualitative results comparison to further demonstrate the effectiveness of Change3D.
+          </p>
+          <br>
+            <img src="./static/images/attention_visualization_v1.2.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Visualization of bi-temporal features F<sub>1</sub>, F<sub>2</sub>, and extracted changes F<sub>C</sub> . Change3D directly focuses on changes during
+               video encoding without intricate change extractors. 
+               for different colors.
+            </p>
+            <br>
+            <img src="./static/images/pred_vis_bcd.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Qualitative comparison on three BCD datasets. White represents a true positive, black is a true negative, <span style="color: #32FD32;">green</span>
+              indicates a false positive, and <span style="color: #FF0000;">red</span> is a false negative. Fewer <span style="color: #32FD32;">green</span>
+               and <span style="color: #FF0000;">red</span> pixels represent better performance.
+            </p>
+            <br>
+            <img src="./static/images/pred_vis_hrscd.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Qualitative comparison on the HRSCD dataset. <span style="color: #000000;">Black</span> 
+              represents non-change, <span style="color: #FF0000;">red</span> denotes artificial surfaces, <span style="color: #32FD32;">green</span>
+               indicates agricultural areas, <span style="color: #0000FF;">blue</span> means forests, <span style="color: #FFF700;">yellow</span> 
+               represents wetlands, and <span style="color: #009080;">teal</span> indicates water.
+            </p>
+            <br>
+            <img src="./static/images/pred_vis_second.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Qualitative comparison on the SECOND dataset. Black represents non-change, <span style="color: #FF0000;">red</span>
+               denotes low-vegetation, <span style="color: #32FD32;">green</span> indicates non-vegetated ground surface, <span style="color: #0000FF;">blue</span>
+                means trees, <span style="color: #FFF700;">yellow</span> represents water,  <span style="color: #008080;">teal</span> indicates buildings, and <span style="color: #FF99FF;">violet</span>
+                 denotes playgrounds
+            </p>
+            <br>
+            <img src="./static/images/pred_vis_xbd.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Qualitative comparison on the xBD dataset. Black represents non-change, white denotes non-damage,
+              <span style="color: #32FD32;">green</span> indicates minor damage, <span style="color: #FFD700;">orange</span> represents major damage,
+              <span style="color: #FF0000;">red</span> indicates destroyed.
+            </p>
+            <br>
+            <img src="./static/images/change_caption_pred_vis.png"
+            style="width: 100%; height: auto;"
+            >
+            <p class="has-text-justified">
+              Qualitative comparison on the LEVIR-CC dataset. <span style="color: #32FD32;">Green</span> indicates
+               correct captions, while <span style="color: #FF0000;">red</span> indicates incorrect predictions.
+            </p>
+        </div>
+      </div>
+    </div>
+    <!-- Performance -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{zhu2025change3d,
+  title={Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective},
+  author={Zhu, Duowang and Huang, Xiaohu and Huang, Haiyan and Zhou, Hao and Shao, Zhenfeng},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={xxxx--xxxx},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+        <div class="column is-8 has-text-centered">
+        <div class="content">
+          <p>
+            This webpage uses a template by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+             We sincerely appreciate their well-organized code.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
